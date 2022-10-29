@@ -12,12 +12,12 @@ email: patelzil@myumanitoba.ca
 website: https://github.com/patelzil
 
 # Dark Mode (true/false/never)
-darkmode: false
+darkmode: never
 
 # Social links
 github_username:  patelzil
 instagram_username: zil.03
-linkedin_username: zil-patel-683657171
+linkedin_username: zil-p-683657171
 # dribbble_username:
 # facebook_username:
 # flickr_username:
@@ -114,35 +114,53 @@ content:
           - Languages/Frameworks/Tools: <mark>Javascript</mark>, <mark>HTML</mark>, <mark>CSS</mark> and <mark>Visual Studio</mark>
           
           - Made queries for user by linking the logic layer with Yelp API and connecting it to Presentation layer.
-#   - title: Experience
-#     layout: list
-#     content:
-#       - layout: left
-#         title: Company name
-#         sub_title: Job title
-#         caption: Date Range (eg. November 2016 - present)
-#         link: Link to company (optional)
+          
+  - title: Experience
+    layout: list
+    content:
+      - layout: left
+        title: Wawanesa Insurance
+        sub_title: Administrative Assistant
+        caption: June 2022 - Present
+        link: https://www.wawanesa.com/canada/
 #         quote: >
 #           Short description of the company (optional)
-#         description: | # this will include new lines to allow paragraphs
-#           Description of role
+        description: | # this will include new lines to allow paragraphs
+          - Perform data entry activities by assisting customers with changes and payment processes on policies.
+          - Ensure all resource materials, including training materials, are kept up to date.
+          
+      - layout: left
+        title: University of Manitoba
+        sub_title: Teaching Assistant
+        caption: January 2022 - April 2022
+        description: |
+          - Taught complex material to computer science students requiring additional help to improve understanding of the course material.
+          - Graded lab quizzes of 75 undergraduate students, providing written feedback and ideas on a bi-weekly basis.
+
   - title: Education
     layout: list
     content:
-      - layout: right
+      - layout: top-middle
         title: University of Manitoba
         sub_title: Bachelor of Science in Computer Science, Honours.
         caption: Sept 2018 - May 2023
-#         quote: >
-#           Short institution or course description (optional)
-#         description: | # this will include new lines to allow paragraphs
-#           Description of qualification
-#   - title: A Little More About Me
-#     layout: text
-#     content: | # this will include new lines to allow paragraphs
-#       This is where you can write a little more about yourself. You could title this section **Interests** and include some of your other interests.
 
-#       Or you could title it **Skills** and write a bit more about things that make you more desirable, like *leadership* or *teamwork*
+  - title: Extracurricular
+    layout: list
+    content:
+      - layout: left
+        title: BAPS
+        sub_title: Volunteer and Peer Mentor
+        caption: January 2014 - Present
+        link: https://www.baps.org/
+        description: |
+          - Participated in locally organized walk green event to raise funds to support life-saving work of the William Osler Health System and Victoria General Foundation spearheaded by the BAPS.
+
+  - title: A Little More About Me
+    layout: text
+    content: | # this will include new lines to allow paragraphs
+      Alongside my interests in Web development and machine learning, some of my interests and hobbies are:
+      - Volunteering with BAPS, a non-profit organization.
 
 # Footer
 footer_show_references: true
