@@ -156,11 +156,11 @@ content:
         description: |
           - Participated in locally organized walk green event to raise funds to support life-saving work of the William Osler Health System and Victoria General Foundation spearheaded by the BAPS.
 
-  - title: A Little More About Me
-    layout: text
-    content: | # this will include new lines to allow paragraphs
-      Alongside my interests in Web development and machine learning, some of my interests and hobbies are:
-      - Volunteering with BAPS, a non-profit organization.
+#   - title: A Little More About Me
+#     layout: text
+#     content: | # this will include new lines to allow paragraphs
+#       Alongside my interests in Web development and Machine Learning, some of my interests and hobbies are:
+#       - Reading
 
 # Footer
 footer_show_references: true
