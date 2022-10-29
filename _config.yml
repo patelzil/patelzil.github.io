@@ -15,9 +15,14 @@ website: https://github.com/patelzil
 darkmode: false
 
 # Social links
-github_username:  https://github.com/patelzil
-instagram_username: https://www.instagram.com/zil.03/
-linkedin_username: https://www.linkedin.com/in/zil-p-683657171/
+github_username:  patelzil
+instagram_username: zil.03
+linkedin_username: zil-patel-683657171
+# dribbble_username:
+# facebook_username:
+# flickr_username:
+# pinterest_username:
+# youtube_username:
 
 # Additional icon links
 # additional_links:
@@ -38,18 +43,26 @@ linkedin_username: https://www.linkedin.com/in/zil-p-683657171/
 # about_title: About Me (Use this to override about section title)
 about_profile_image: images/aboutimage.jpeg
 about_content: | # this will include new lines to allow paragraphs
- Hi, my name is Zil and I am a student at the University of Manitoba. I am pursuing an undergraduate degree in Computer Science Honours. My fields of interest are Artificial Intelligence, Machine learning, Databases and Web Development.
+ Hi, my name is Zil and I am currently pursuing an undergraduate degree in Computer Science Honours at the University of Manitoba. 
+ My fields of interest are Web Development, Artificial Intelligence, Machine learning and Databases.
+ 
+ The languages and frameworks I have experience with are:
+ <mark>Javascript</mark>,
+ <mark>React</mark>,
+ <mark>Node.js</mark>,
+ <mark>Java</mark>,
+ <mark>MongoDB</mark>,
+ <mark>Git</mark> and
 
 content:
-#   - title: Projects # Title for the section
-#     layout: list # Type of content section (list/text)
-#     content:
-#       - layout: left
-#         border: weak  # Value of `weak` will display a weak border below this item. # Any 
-#                       # other value (or no value) means no border will be displayed
-#         title: Project name
-#         link: Link to project (eg. sproogen.github.io/modern-resume-theme)(optional)
-#         link_text: Link Text
+  - title: Projects
+    layout: list
+    content:
+      - layout: left
+        border: weak
+        title: E-book-hub
+        link: https://github.com/patelzil/E-Book-Hub
+        link_text: Link Text
 #         additional_links:
 #           - title:  Github page for project (eg. sproogen/modern-resume-theme)
 #             icon: fab fa-github
@@ -57,10 +70,31 @@ content:
 #           - title:  Github page for project (eg. sproogen/modern-resume-theme)
 #             icon: fab fa-github
 #             url: Link to project (eg. sproogen.github.io/modern-resume-theme)(optional)
-#         quote: >
-#           Short overview of the project (optional)
-#         description: | # this will include new lines to allow paragraphs
-#           Description about the work on/with the project
+        quote: >
+          An application that interests its users towards reading e-books in an easily viewable layout.
+        description: | # this will include new lines to allow paragraphs
+          - Created UI using react.js and bootstrap allowing for integration with Google book API and MongoDB.  
+          
+          - Implemented chat feature using socket.io
+          
+          - Assisted in drawing the Architectural and Class diagrams for the application features.
+      - layout: left
+        border: weak  # Value of `weak` will display a weak border below this item. # Any 
+                      # other value (or no value) means no border will be displayed
+        title: Project name
+        link: Link to project (eg. sproogen.github.io/modern-resume-theme)(optional)
+        link_text: Link Text
+        additional_links:
+          - title:  Github page for project (eg. sproogen/modern-resume-theme)
+            icon: fab fa-github
+            url: Link to project (eg. sproogen.github.io/modern-resume-theme)(optional)
+          - title:  Github page for project (eg. sproogen/modern-resume-theme)
+            icon: fab fa-github
+            url: Link to project (eg. sproogen.github.io/modern-resume-theme)(optional)
+        quote: >
+          Short overview of the project (optional)
+        description: | # this will include new lines to allow paragraphs
+          Description about the work on/with the project
 #   - title: Experience
 #     layout: list
 #     content:
