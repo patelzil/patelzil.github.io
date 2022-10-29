@@ -58,7 +58,7 @@ content:
   - title: Projects
     layout: list
     content:
-      - layout: left
+      - layout: top-middle
         border: weak
         title: E-book-hub
 #         link: 
@@ -78,7 +78,7 @@ content:
           
           - Assisted in drawing the Architectural and Class diagrams for the application features.
           
-      - layout: left
+      - layout: top-middle
         border: weak
         title: Skip the Service
         link: https://patelzil.github.io/skip-the-service/
@@ -95,7 +95,7 @@ content:
           
           - Created UI for business and user locations using built-in Android libraries.
           
-      - layout: left
+      - layout: top-middle
         border: weak
         title: Restaurant Search
         quote: >
@@ -105,7 +105,7 @@ content:
           
           - Made queries for user by linking the logic layer with Yelp API and connecting it to Presentation layer.
           
-      - layout: left
+      - layout: top-middle
         border: weak
         title: Crave
         quote: >
