@@ -51,50 +51,69 @@ about_content: | # this will include new lines to allow paragraphs
  <mark>React</mark>,
  <mark>Node.js</mark>,
  <mark>Java</mark>,
- <mark>MongoDB</mark>,
- <mark>Git</mark> and
+ <mark>MongoDB</mark> and
+ <mark>Git</mark>
 
 content:
   - title: Projects
     layout: list
     content:
-      - layout: left
+      - layout: top-middle
         border: weak
         title: E-book-hub
-        link: https://github.com/patelzil/E-Book-Hub
-        link_text: Link Text
-#         additional_links:
-#           - title:  Github page for project (eg. sproogen/modern-resume-theme)
-#             icon: fab fa-github
-#             url: Link to project (eg. sproogen.github.io/modern-resume-theme)(optional)
-#           - title:  Github page for project (eg. sproogen/modern-resume-theme)
-#             icon: fab fa-github
-#             url: Link to project (eg. sproogen.github.io/modern-resume-theme)(optional)
+#         link: 
+#         link_text: Link Text
+        additional_links:
+          - title:  patelzil/E-Book-Hub
+            icon: fab fa-github
+            url: https://github.com/patelzil/E-Book-Hub
         quote: >
           An application that interests its users towards reading e-books in an easily viewable layout.
-        description: | # this will include new lines to allow paragraphs
+        description: |
+          - Languages/Frameworks/Tools: <mark>React</mark>, <mark>Node.js</mark>, <mark>Express.js</mark>, <mark>MongoDB</mark>, <mark>Docker</mark> and <mark>Git</mark>
+          
           - Created UI using react.js and bootstrap allowing for integration with Google book API and MongoDB.  
           
           - Implemented chat feature using socket.io
           
           - Assisted in drawing the Architectural and Class diagrams for the application features.
-      - layout: left
-        border: weak  # Value of `weak` will display a weak border below this item. # Any 
-                      # other value (or no value) means no border will be displayed
-        title: Project name
-        link: Link to project (eg. sproogen.github.io/modern-resume-theme)(optional)
-        link_text: Link Text
+          
+      - layout: top-middle
+        border: weak
+        title: Skip the Service
+        link: https://patelzil.github.io/skip-the-service/
         additional_links:
-          - title:  Github page for project (eg. sproogen/modern-resume-theme)
+          - title:  patelzil/skip-the-service
             icon: fab fa-github
-            url: Link to project (eg. sproogen.github.io/modern-resume-theme)(optional)
-          - title:  Github page for project (eg. sproogen/modern-resume-theme)
-            icon: fab fa-github
-            url: Link to project (eg. sproogen.github.io/modern-resume-theme)(optional)
+            url: https://github.com/patelzil/skip-the-service
         quote: >
-          Short overview of the project (optional)
-        description: | # this will include new lines to allow paragraphs
-          Description about the work on/with the project
+          An application that allows homeowners to access services right from one convenient location.
+        description: |
+          - Languages/Frameworks/Tools: <mark>Java</mark>, <mark>Android Studio</mark>, <mark>SQLite</mark> and <mark>Gitlab</mark>
+          
+          - Made endpoints and queries for user and business accounts by linking the business and presentation layers using Java and SQLite.
+          
+          - Created UI for business and user locations using built-in Android libraries.
+          
+      - layout: top-middle
+        border: weak
+        title: Restaurant Search
+        quote: >
+          Search for restaurant in Winnipeg based on the food you want.
+        description: |
+          - Languages/Frameworks/Tools: <mark>Javascript</mark>, <mark>React Native</mark>, <mark>Visual Studio</mark> and <mark>Git</mark>
+          
+          - Made queries for user by linking the logic layer with Yelp API and connecting it to Presentation layer.
+          
+      - layout: top-middle
+        border: weak
+        title: Crave
+        quote: >
+          An online food ordering system integrated with online payment system.
+        description: |
+          - Languages/Frameworks/Tools: <mark>Javascript</mark>, <mark>HTML</mark>, <mark>CSS</mark> and <mark>Visual Studio</mark>
+          
+          - Made queries for user by linking the logic layer with Yelp API and connecting it to Presentation layer.
 #   - title: Experience
 #     layout: list
 #     content:
