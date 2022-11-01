@@ -106,7 +106,6 @@ content:
           - Made queries for user by linking the logic layer with Yelp API and connecting it to Presentation layer.
           
       - layout: top-middle
-        border: weak
         title: Crave
         quote: >
           An online food ordering system integrated with online payment system.
