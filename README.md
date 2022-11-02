@@ -11,7 +11,7 @@ Link to this book can be found under [more resources.](#more-resources)
 ---
 
 ## Prerequisites
-Below are the two main things you would require before proceeding:
+Below are the some of the things you would require before proceeding:
 - A resume formatted in Markdown.
 - A Github account.
 - Install Jekyll on your computer.
@@ -30,7 +30,6 @@ A couple of good themes have been linked under [more resources.](#more-resources
 
 > Etter describes in his book that static websites are easy to setup, secure and are fast. They do not have server side dependencies and therefore they are not generated dynamically.
 
-
 ### 2) Fork the repository.
 > According to Github docs by forking a repository a copy of it is created in your profile, from which changes can be made without affecting the original repository.
 
@@ -46,6 +45,7 @@ Once the theme has been selected, go to its github repository;
 - Now that we already have the theme/template copied on our repository, we can go ahead and edit the `_config.yml`. 
 - By editing the `_config.yml` file we will be able to modify and add content of your own resume to show on the static website.
   1. To edit the file, click on the file, then click on the pencil icon at the top.
+   
   2. Add your content to the file, write a commit message such as "updated _config.yml" or "added resume content" and press the `Commit changes` button.
 
 > This ensures the website content is updated instantly. In his book, Andrew Etter advices to host content on website for the very same reason and also adds that in this way content is kept in sync to new updates.
