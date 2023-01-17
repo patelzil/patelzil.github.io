@@ -73,11 +73,12 @@ content:
         description: |
           - Languages/Frameworks/Tools: <mark>React</mark>, <mark>Node.js</mark>, <mark>Express.js</mark>, <mark>MongoDB</mark>, <mark>Docker</mark> and <mark>Git</mark>
           
-          - Created UI using react.js and bootstrap allowing for integration with Google book API and MongoDB.  
+          - Drew architectural and class diagrams for application features.
           
-          - Implemented chat feature using socket.io
+          - Created UI using react.js and bootstrap allowing for integration with Google book API and MongoDB.
           
-          - Assisted in drawing the Architectural and Class diagrams for the application features.
+          - Implemented chat feature using Socket.io enhancing two-way communication between users.
+
           
       - layout: top-middle
         border: weak
@@ -92,15 +93,16 @@ content:
         description: |
           - Languages/Frameworks/Tools: <mark>Java</mark>, <mark>Android Studio</mark>, <mark>SQLite</mark> and <mark>Gitlab</mark>
           
-          - Made endpoints and queries for user and business accounts by linking the business and presentation layers using Java and SQLite.
-          
           - Created UI for business and user locations using built-in Android libraries.
+          
+          - Made endpoints and queries using Java and SQLite.
+
           
       - layout: top-middle
         border: weak
         title: Restaurant Search
         quote: >
-          Search for restaurant in Winnipeg based on the food you want.
+          Search for restaurants in Winnipeg based on the food you want.
         description: |
           - Languages/Frameworks/Tools: <mark>Javascript</mark>, <mark>React Native</mark>, <mark>Visual Studio</mark> and <mark>Git</mark>
           
@@ -113,7 +115,7 @@ content:
         description: |
           - Languages/Frameworks/Tools: <mark>Javascript</mark>, <mark>HTML</mark>, <mark>CSS</mark> and <mark>Visual Studio</mark>
           
-          - Made queries for user by linking the logic layer with Yelp API and connecting it to Presentation layer.
+          - Improved user experience by linking their payment methods to their associated accounts, which reduced time in placing the order. 
           
   - title: Experience
     layout: list
@@ -126,7 +128,7 @@ content:
 #         quote: >
 #           Short description of the company (optional)
         description: | # this will include new lines to allow paragraphs
-          - Perform data entry activities by assisting customers with changes and payment processes on policies.
+          - •	Make changes to policies efficiently by using Policy Center software and JIRA.
           - Ensure all resource materials, including training materials, are kept up to date.
           
       - layout: left
@@ -135,7 +137,7 @@ content:
         caption: January 2022 - April 2022
         description: |
           - Taught complex material to computer science students requiring additional help to improve understanding of the course material.
-          - Graded lab quizzes of 75 undergraduate students, providing written feedback and ideas on a bi-weekly basis.
+          - •	Grade assignments of more than 100 undergraduate Computer Science students, providing written feedback and ideas for improvement.
 
   - title: Education
     layout: list
