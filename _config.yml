@@ -133,11 +133,11 @@ content:
           
       - layout: left
         title: University of Manitoba
-        sub_title: Teaching Assistant
-        caption: January 2022 - April 2022
+        sub_title: Teaching Assistant and grader
+        caption: January 2022 - Present
         description: |
           - Taught complex material to computer science students requiring additional help to improve understanding of the course material.
-          - •	Grade assignments of more than 100 undergraduate Computer Science students, providing written feedback and ideas for improvement.
+          - Grade assignments of more than 100 undergraduate Computer Science students, providing written feedback and ideas for improvement.
 
   - title: Education
     layout: list
