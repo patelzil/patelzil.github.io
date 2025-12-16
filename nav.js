@@ -1,6 +1,6 @@
 /**
  * Shared Navigation Component
- * Injects navigation HTML, favicon, and theme toggle functionality into any page
+ * Injects navigation HTML, favicon, theme toggle functionality and privacy friendly analytics into any page
  * Usage: Include <script src="/nav.js"></script> in the <head> with defer attribute
  */
 
@@ -12,6 +12,15 @@
     favicon.type = "image/svg+xml";
     favicon.href = "/assets/favicon.svg";
     document.head.appendChild(favicon);
+  }
+
+  // Inject GoatCounter analytics script
+  if (!document.querySelector('script[data-goatcounter]')) {
+    const analyticsScript = document.createElement("script");
+    analyticsScript.async = true;
+    analyticsScript.src = "//gc.zgo.at/count.js";
+    analyticsScript.setAttribute("data-goatcounter", "https://patelzil.goatcounter.com/count");
+    document.head.appendChild(analyticsScript);
   }
 
   // Navigation HTML template
