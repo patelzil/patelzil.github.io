@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <script src="/nav.js" defer></script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Blog posts by Zil Patel on AI engineering, backend development, and learning in public"
+    />
+    <meta name="author" content="Zil Patel" />
+    <title>Blog - Zil Patel</title>
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+
+  <body>
+    <header class="site-header">
+      <h1>Blog</h1>
+      <p class="site-subtitle">
+        Notes on building, learning, and AI engineering
+      </p>
+    </header>
+
+    <main>
+      <ul class="blog-list" id="blog-posts-container">
+        <!-- Blog posts will be loaded dynamically from blog.json -->
+        <li class="blog-item">
+          <p>Loading posts...</p>
+        </li>
+      </ul>
+    </main>
+
+    <script>
+      // Fetch and render blog posts from JSON
+      async function loadBlogPosts() {
+        try {
+          const response = await fetch("/data/blog.json");
+          const data = await response.json();
+          renderBlogPosts(data.posts);
+        } catch (error) {
+          console.error("Error loading blog posts:", error);
+          document.getElementById("blog-posts-container").innerHTML = `
+                    <li class="blog-item">
+                        <p>Error loading posts. Please check the console.</p>
+                    </li>
+                `;
+        }
+      }
+
+      function renderBlogPosts(posts) {
+        const container = document.getElementById("blog-posts-container");
+
+        if (posts.length === 0) {
+          container.innerHTML = `
+                    <li class="blog-item">
+                        <p>No posts yet. Check back soon!</p>
+                    </li>
+                `;
+          return;
+        }
+
+        container.innerHTML = posts
+          .map(
+            (post) => `
+                <li class="blog-item">
+                    <h2 class="blog-title">
+                        ${
+                          post.url
+                            ? `<a href="${post.url}">🔗 ${post.title}</a>`
+                            : post.title
+                        }
+                    </h2>
+                    <p class="blog-meta">${post.date}</p>
+                    <p class="blog-excerpt">${post.excerpt}</p>
+                </li>
+            `
+          )
+          .join("\n");
+      }
+
+      // Load blog posts when page loads
+      loadBlogPosts();
+    </script>
+
+    <footer>
+      <p>&copy; 2025 Zil Patel. Built with HTML, CSS, and zero frameworks.</p>
+    </footer>
+  </body>
+</html>

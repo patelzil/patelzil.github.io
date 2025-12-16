@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <script src="/nav.js" defer></script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="HTML tools and utilities built by Zil Patel"
+    />
+    <meta name="author" content="Zil Patel" />
+    <title>Tools - Zil Patel</title>
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+
+  <body>
+    <header class="site-header">
+      <h1>Tools</h1>
+      <p class="site-subtitle">Simple HTML tools and utilities</p>
+    </header>
+
+    <main>
+      <p class="mb-lg">
+        This is a collection of standalone HTML tools I've built. Each tool is
+        self-contained and works entirely in your browser.
+      </p>
+
+      <ul id="tools-list">
+        <!-- Tools loaded dynamically from tools.json -->
+      </ul>
+    </main>
+
+    <script>
+      // Load and render tools from JSON
+      async function loadTools() {
+        try {
+          const response = await fetch("/data/tools.json");
+          const data = await response.json();
+          renderTools(data.tools);
+        } catch (error) {
+          console.error("Error loading tools:", error);
+          document.getElementById("tools-list").innerHTML =
+            "<li>Error loading tools. Please try again later.</li>";
+        }
+      }
+
+      function renderTools(tools) {
+        const toolsList = document.getElementById("tools-list");
+
+        if (!tools || tools.length === 0) {
+          toolsList.innerHTML =
+            "<li>No tools available yet. Check back soon!</li>";
+          return;
+        }
+
+        toolsList.innerHTML = tools
+          .map(
+            (tool) => `
+                <li>
+                    <a href="${tool.url}">${tool.name}</a> - ${tool.description}
+                </li>
+            `
+          )
+          .join("");
+      }
+
+      // Load tools on page load
+      loadTools();
+    </script>
+
+    <footer>
+      <p>&copy; 2025 Zil Patel.</p>
+      <p>
+        Built with HTML, CSS, and zero frameworks. The HTML-based tools is
+        inspired by
+        <a
+          href="https://tools.simonwillison.net/"
+          target="_blank"
+          rel="noopener noreferrer"
+          >Simon Willison</a
+        >.
+      </p>
+    </footer>
+  </body>
+</html>

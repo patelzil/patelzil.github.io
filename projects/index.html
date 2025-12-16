@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <script src="/nav.js" defer></script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Projects by Zil Patel - AI engineering and backend development work"
+    />
+    <meta name="author" content="Zil Patel" />
+    <title>Projects - Zil Patel</title>
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+
+  <body>
+    <header class="site-header">
+      <h1>Projects</h1>
+      <p class="site-subtitle">
+        Things I've built while learning and working in public
+      </p>
+    </header>
+
+    <main>
+      <ul class="project-list" id="projects-container">
+        <li class="project-item">
+          <p>Loading projects...</p>
+        </li>
+      </ul>
+    </main>
+
+    <script>
+      // Fetch and render projects from JSON
+      async function loadProjects() {
+        try {
+          const response = await fetch("/data/projects.json");
+          const data = await response.json();
+          renderProjects(data.projects);
+        } catch (error) {
+          console.error("Error loading projects:", error);
+          document.getElementById("projects-container").innerHTML = `
+                    <li class="project-item">
+                        <p>Error loading projects. Please check the console.</p>
+                    </li>
+                `;
+        }
+      }
+
+      function renderProjects(projects) {
+        const container = document.getElementById("projects-container");
+
+        if (projects.length === 0) {
+          container.innerHTML = `
+                    <li class="project-item">
+                        <p>No projects yet. Check back soon!</p>
+                    </li>
+                `;
+          return;
+        }
+
+        container.innerHTML = projects
+          .map(
+            (project) => `
+                <li class="project-item" id="${project.id}">
+                    <h2 class="project-title">${project.title}</h2>
+                    <p class="project-meta">${project.date}</p>
+                    <p class="project-description">${project.description}</p>
+                    ${
+                      project.keyLearnings
+                        ? `
+                        <p class="project-description">
+                            <strong>Key learnings:</strong> ${project.keyLearnings}
+                        </p>
+                    `
+                        : ""
+                    }
+                    <div class="tech-tags">
+                        ${project.tags
+                          .map((tag) => `<span class="tech-tag">${tag}</span>`)
+                          .join("\n                        ")}
+                    </div>
+                    <p class="mt-sm">
+                        ${
+                          project.links.github
+                            ? `<a href="${project.links.github}" target="_blank" rel="noopener noreferrer">GitHub</a>`
+                            : ""
+                        }
+                        ${
+                          project.links.github && project.links.demo
+                            ? " · "
+                            : ""
+                        }
+                        ${
+                          project.links.demo
+                            ? `<a href="${project.links.demo}" target="_blank" rel="noopener noreferrer">Live Demo</a>`
+                            : ""
+                        }
+                        ${
+                          (project.links.github || project.links.demo) &&
+                          project.links.blog
+                            ? " · "
+                            : ""
+                        }
+                        ${
+                          project.links.blog
+                            ? `<a href="${project.links.blog}">Read More</a>`
+                            : ""
+                        }
+                    </p>
+                </li>
+            `
+          )
+          .join("\n            ");
+      }
+
+      // Load projects when page loads
+      loadProjects();
+    </script>
+
+    <footer>
+      <p>&copy; 2025 Zil Patel. Built with HTML, CSS, and zero frameworks.</p>
+    </footer>
+  </body>
+</html>

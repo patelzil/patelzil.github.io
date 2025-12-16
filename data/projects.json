@@ -1,0 +1,22 @@
+{
+  "projects": [
+    {
+      "id": "verplexity",
+      "title": "Verplexity: Real-Time Voice AI Agent",
+      "date": "December 2025",
+      "description": "A voice-powered AI assistant featuring sub-500ms response times, full-duplex conversation with instant interruption handling, and a 3D particle visualizer built with React Three Fiber. Optimized for natural, human-speed voice interaction.",
+      "keyLearnings": "Voice AI integration, real-time audio visualization, optimizing latency for voice interactions.",
+      "tags": [
+        "Python",
+        "FastAPI",
+        "OpenAI",
+        "Vapi",
+        "JavaScript",
+        "React Three Fiber"
+      ],
+      "links": {
+        "demo": "https://verplexity.netlify.app"
+      }
+    }
+  ]
+}
