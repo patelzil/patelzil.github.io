@@ -249,21 +249,19 @@
           .map(
             (project) => `
         <li class="project-item">
-          <h3 class="project-title">
-            <a href="/projects#${project.id}">${project.title}</a>
-          </h3>
+          <h3 class="project-title">${project.title}</h3>
           <p class="project-meta">${project.date}</p>
           <p class="project-description">${project.description}</p>
           <div class="tech-tags">
             ${project.tags
               .slice(0, 4)
               .map((tag) => `<span class="tech-tag">${tag}</span>`)
-              .join("\n            ")}
+              .join("\n")}
           </div>
         </li>
       `
           )
-          .join("\n      ");
+          .join("\n");
       }
 
       // Load recent projects when page loads
@@ -310,7 +308,7 @@
         </li>
       `
           )
-          .join("\n      ");
+          .join("\n");
       }
 
       // Load recent blog posts when page loads

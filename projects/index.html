@@ -77,7 +77,7 @@
                     <div class="tech-tags">
                         ${project.tags
                           .map((tag) => `<span class="tech-tag">${tag}</span>`)
-                          .join("\n                        ")}
+                          .join("\n")}
                     </div>
                     <p class="mt-sm">
                         ${
@@ -110,7 +110,7 @@
                 </li>
             `
           )
-          .join("\n            ");
+          .join("\n");
       }
 
       // Load projects when page loads
