@@ -38,20 +38,33 @@
         align-items: center;
       }
 
-      .paste-instruction {
-        flex: 1;
-        min-width: 250px;
-        color: var(--color-text-secondary);
-        font-size: 0.95rem;
+
+      .paste-area {
+        margin-bottom: 2rem;
       }
 
-      .paste-instruction kbd {
+      .paste-input {
+        width: 100%;
+        min-height: 120px;
+        padding: 1rem;
+        border: 2px dashed var(--color-border);
+        border-radius: 8px;
         background: var(--color-bg-secondary);
-        padding: 0.2rem 0.5rem;
-        border-radius: 3px;
-        font-family: monospace;
-        font-size: 0.9em;
-        border: 1px solid var(--color-border);
+        color: var(--color-text);
+        font-family: inherit;
+        font-size: 0.95rem;
+        resize: vertical;
+        transition: border-color 0.2s;
+      }
+
+      .paste-input:focus {
+        outline: none;
+        border-color: var(--color-accent);
+        border-style: solid;
+      }
+
+      .paste-input::placeholder {
+        color: var(--color-text-secondary);
       }
 
       .btn {
@@ -284,10 +297,6 @@
           align-items: stretch;
         }
 
-        .paste-instruction {
-          text-align: center;
-        }
-
         .item-header {
           flex-direction: column;
           align-items: flex-start;
@@ -316,10 +325,15 @@
           </p>
         </div>
 
+        <div class="paste-area">
+          <textarea
+            id="paste-input"
+            class="paste-input"
+            placeholder="Desktop: Paste anywhere on the page. Mobile: Tap here and paste your text or images."
+          ></textarea>
+        </div>
+
         <div class="controls">
-          <div class="paste-instruction">
-            Paste anywhere on this page to save text and images.
-          </div>
           <button class="btn btn-clear" id="clear-all">Clear All</button>
         </div>
 
@@ -614,8 +628,8 @@
         });
       }
 
-      // Global Paste Handler
-      document.addEventListener("paste", async (e) => {
+      // Paste Handler Function
+      async function handlePaste(e) {
         e.preventDefault();
 
         const items = e.clipboardData.items;
@@ -643,8 +657,24 @@
           }
         }
 
+        // Clear the input field if paste happened there
+        const pasteInput = document.getElementById("paste-input");
+        if (e.target === pasteInput) {
+          setTimeout(() => {
+            pasteInput.value = "";
+          }, 100);
+        }
+
         await renderItems();
-      });
+      }
+
+      // Global Paste Handler (works on desktop)
+      document.addEventListener("paste", handlePaste);
+
+      // Paste Input Handler (works on mobile and desktop)
+      document
+        .getElementById("paste-input")
+        .addEventListener("paste", handlePaste);
 
       // Clear All Handler
       document
