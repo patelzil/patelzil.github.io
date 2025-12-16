@@ -31,6 +31,7 @@ TEMPLATE_FILE = Path("blog_template.html")
 BLOG_TEMPLATE = """<!DOCTYPE html>
 <html lang="en">
 <head>
+  <script src="/nav.js" defer></script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="{description}">
@@ -39,15 +40,6 @@ BLOG_TEMPLATE = """<!DOCTYPE html>
   <link rel="stylesheet" href="/style.css">
 </head>
 <body>
-  <nav>
-    <ul>
-      <li><a href="/">Home</a></li>
-      <li><a href="/projects">Projects</a></li>
-      <li><a href="/blog">Blog</a></li>
-      <li><a href="/tools">Tools</a></li>
-    </ul>
-  </nav>
-
   <article>
     <header class="site-header">
       <h1>{title}</h1>
