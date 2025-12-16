@@ -1,3 +1,9 @@
 {
-  "tools": []
+  "tools": [
+    {
+      "name": "Clipboard Manager",
+      "description": "Store and manage your copied text and images locally in your browser",
+      "url": "/tools/clipboard.html"
+    }
+  ]
 }

@@ -1,6 +1,13 @@
 {
   "posts": [
     {
+      "id": "building-clipboard-manager",
+      "title": "Building a Clipboard Manager for macOS",
+      "date": "December 16, 2025",
+      "excerpt": "I recently switched from Windows to macOS and missed the built-in clipboard history (Win+V). Built a browser-based clipboard manager using IndexedDB - stores text and images locally with no frameworks or backend. Chose IndexedDB over localStorage for better performance with large images and unlimited storage. The tool supports pasting anywhere on the page (Cmd/Ctrl+V) and stores everything client-side with no auto-deletion.",
+      "url": "/tools/clipboard.html"
+    },
+    {
       "id": "welcome",
       "title": "Welcome to My Portfolio",
       "date": "December 13, 2025",
