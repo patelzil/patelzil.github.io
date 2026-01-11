@@ -4,6 +4,11 @@
       "name": "Clipboard Manager",
       "description": "Store and manage your copied text and images locally in your browser",
       "url": "/tools/clipboard.html"
+    },
+    {
+      "name": "PDF Merger",
+      "description": "Merge multiple PDF files into one.",
+      "url": "/tools/pdf-merger.html"
     }
   ]
 }
