@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -10,7 +10,11 @@
     />
     <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" />
     <link rel="stylesheet" href="/style.css" />
-		<script data-goatcounter="https://patelzil.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+    <script
+      data-goatcounter="https://patelzil.goatcounter.com/count"
+      async
+      src="//gc.zgo.at/count.js"
+    ></script>
     <style>
       .clipboard-container {
         max-width: 900px;
@@ -111,6 +115,18 @@
 
       .btn-clear:hover {
         background: #c82333;
+      }
+
+      .btn-export {
+        background: var(--color-bg-secondary);
+        color: var(--color-text);
+        border: 1px solid var(--color-border);
+      }
+
+      .btn-export:hover {
+        background: var(--color-accent);
+        color: white;
+        border-color: var(--color-accent);
       }
 
       .items-container {
@@ -346,9 +362,21 @@
 
         <div class="controls">
           <button class="btn btn-paste" id="paste-btn">
-            📋 Paste from Clipboard
+            Paste from Clipboard
           </button>
-          <button class="btn btn-clear" id="clear-all">Clear All</button>
+          <div style="display: flex; gap: 1rem; flex-wrap: wrap">
+            <button class="btn btn-export" id="import-json">Import JSON</button>
+            <button class="btn btn-export" id="export-json">
+              Export as JSON
+            </button>
+            <button class="btn btn-clear" id="clear-all">Clear All</button>
+          </div>
+          <input
+            type="file"
+            id="import-file"
+            accept="application/json,.json"
+            style="display: none"
+          />
         </div>
 
         <div class="items-container" id="items-container">
@@ -422,6 +450,17 @@
           const transaction = db.transaction([STORE_NAME], "readwrite");
           const store = transaction.objectStore(STORE_NAME);
           const request = store.add(item);
+
+          request.onsuccess = () => resolve(item);
+          request.onerror = () => reject(request.error);
+        });
+      }
+
+      async function putItem(item) {
+        return new Promise((resolve, reject) => {
+          const transaction = db.transaction([STORE_NAME], "readwrite");
+          const store = transaction.objectStore(STORE_NAME);
+          const request = store.put(item);
 
           request.onsuccess = () => resolve(item);
           request.onerror = () => reject(request.error);
@@ -530,7 +569,7 @@
                 <div style="display: flex; gap: 0.5rem; align-items: center;">
                   <span class="item-type">${item.type}</span>
                   <span class="item-timestamp">${formatTimestamp(
-                    item.timestamp
+                    item.timestamp,
                   )}</span>
                 </div>
                 <div class="item-actions">
@@ -548,7 +587,7 @@
                     ? `<div class="text-content ${
                         isLongText ? "collapsed" : ""
                       }" data-id="text-${item.id}">${escapeHtml(
-                        item.content
+                        item.content,
                       )}</div>
                      ${
                        isLongText
@@ -620,7 +659,7 @@
           btn.addEventListener("click", (e) => {
             const textId = e.target.dataset.id;
             const textElement = document.querySelector(
-              `.text-content[data-id="${textId}"]`
+              `.text-content[data-id="${textId}"]`,
             );
 
             if (textElement.classList.contains("collapsed")) {
@@ -715,7 +754,7 @@
         .addEventListener("click", async () => {
           if (
             confirm(
-              "Are you sure you want to delete all clipboard items? This cannot be undone."
+              "Are you sure you want to delete all clipboard items? This cannot be undone.",
             )
           ) {
             await clearAll();
@@ -724,12 +763,162 @@
           }
         });
 
+      // Export as JSON Handler
+      document
+        .getElementById("export-json")
+        .addEventListener("click", async () => {
+          const items = await getAllItems();
+
+          if (items.length === 0) {
+            showToast("No items to export");
+            return;
+          }
+
+          // Convert items to exportable format (images to base64)
+          const exportData = await Promise.all(
+            items.map(async (item) => {
+              if (item.type === "image" && item.content instanceof Blob) {
+                const base64 = await blobToBase64(item.content);
+                return {
+                  id: item.id,
+                  type: item.type,
+                  content: base64,
+                  mimeType: item.content.type,
+                  timestamp: item.timestamp,
+                };
+              }
+              return {
+                id: item.id,
+                type: item.type,
+                content: item.content,
+                timestamp: item.timestamp,
+              };
+            }),
+          );
+
+          const json = JSON.stringify(exportData, null, 2);
+          const blob = new Blob([json], { type: "application/json" });
+          const url = URL.createObjectURL(blob);
+          const a = document.createElement("a");
+          a.href = url;
+          a.download = `clipboard-export-${new Date().toISOString().slice(0, 10)}.json`;
+          document.body.appendChild(a);
+          a.click();
+          document.body.removeChild(a);
+          URL.revokeObjectURL(url);
+          showToast("Exported successfully!");
+        });
+
+      function blobToBase64(blob) {
+        return new Promise((resolve, reject) => {
+          const reader = new FileReader();
+          reader.onloadend = () => resolve(reader.result);
+          reader.onerror = reject;
+          reader.readAsDataURL(blob);
+        });
+      }
+
+      function base64ToBlob(dataUrl, fallbackMime) {
+        const match = /^data:([^;,]+)?(;base64)?,(.*)$/.exec(dataUrl);
+        if (!match) throw new Error("Invalid data URL");
+        const mime = match[1] || fallbackMime || "application/octet-stream";
+        const isBase64 = !!match[2];
+        const data = match[3];
+        const binary = isBase64 ? atob(data) : decodeURIComponent(data);
+        const bytes = new Uint8Array(binary.length);
+        for (let i = 0; i < binary.length; i++) {
+          bytes[i] = binary.charCodeAt(i);
+        }
+        return new Blob([bytes], { type: mime });
+      }
+
+      // Import JSON Handler
+      const importFileInput = document.getElementById("import-file");
+
+      document
+        .getElementById("import-json")
+        .addEventListener("click", () => importFileInput.click());
+
+      importFileInput.addEventListener("change", async (e) => {
+        const file = e.target.files[0];
+        if (!file) return;
+
+        try {
+          const text = await file.text();
+          const data = JSON.parse(text);
+
+          if (!Array.isArray(data)) {
+            throw new Error("Expected a JSON array of clipboard items");
+          }
+
+          const existing = await getAllItems();
+          const existingIds = new Set(existing.map((i) => i.id));
+          let imported = 0;
+          let skipped = 0;
+
+          for (const raw of data) {
+            if (!raw || (raw.type !== "text" && raw.type !== "image")) {
+              skipped++;
+              continue;
+            }
+
+            let id = typeof raw.id === "number" ? raw.id : Date.now();
+            while (existingIds.has(id)) id++;
+            existingIds.add(id);
+
+            const timestamp = raw.timestamp || new Date().toISOString();
+            let item;
+
+            if (raw.type === "image") {
+              if (typeof raw.content !== "string") {
+                skipped++;
+                continue;
+              }
+              const blob = base64ToBlob(raw.content, raw.mimeType);
+              item = {
+                id,
+                type: "image",
+                content: blob,
+                timestamp,
+                preview: null,
+              };
+            } else {
+              if (typeof raw.content !== "string") {
+                skipped++;
+                continue;
+              }
+              item = {
+                id,
+                type: "text",
+                content: raw.content,
+                timestamp,
+                preview: raw.content.substring(0, 200),
+              };
+            }
+
+            await putItem(item);
+            imported++;
+          }
+
+          await renderItems();
+          showToast(
+            `Imported ${imported} item${imported !== 1 ? "s" : ""}` +
+              (skipped ? ` (${skipped} skipped)` : ""),
+          );
+        } catch (err) {
+          console.error("Import failed:", err);
+          showToast("Import failed: " + err.message);
+        } finally {
+          importFileInput.value = "";
+        }
+      });
+
       // Theme Initialization
       (function () {
         const body = document.body;
         const saved = localStorage.getItem("theme");
         const prefersDark = window.matchMedia(
-          "(prefers-color-scheme: dark)"
+          "(prefers-color-scheme: dark)",
         ).matches;
 
         if (saved) {
