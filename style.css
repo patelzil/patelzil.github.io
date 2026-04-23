@@ -536,6 +536,141 @@ pre code {
 }
 
 /* ============================================
+   Back Link
+   ============================================ */
+.back-link {
+  display: inline-block;
+  margin: 0 0 var(--space-xs);
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.back-link:hover {
+  color: var(--color-text);
+  text-decoration: none;
+}
+
+/* ============================================
+   Blog Post Hero
+   ============================================ */
+.post-hero {
+  margin: var(--space-md) 0 var(--space-2xl);
+  text-align: center;
+}
+
+.post-hero-tags {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-md);
+  margin-bottom: var(--space-xl);
+  position: relative;
+}
+
+.post-hero-tags::before,
+.post-hero-tags::after {
+  content: '';
+  flex: 1;
+  height: 8px;
+  background-repeat: no-repeat, no-repeat, no-repeat;
+  background-size: calc(100% - 16px) 1px, 8px 8px, 8px 8px;
+  background-image:
+    linear-gradient(to right, var(--color-border), var(--color-border)),
+    radial-gradient(circle, var(--color-accent) 4px, transparent 4px),
+    radial-gradient(circle, var(--color-accent) 4px, transparent 4px);
+  background-position: center center, left center, right center;
+}
+
+.post-tag {
+  display: inline-block;
+  font-size: var(--text-sm);
+  font-family: var(--font-mono);
+  padding: 0.4em 0.9em;
+  border-radius: 6px;
+  background-color: color-mix(in srgb, var(--color-accent) 10%, var(--color-bg));
+  color: var(--color-text);
+  border: 1px solid color-mix(in srgb, var(--color-accent) 20%, transparent);
+  white-space: nowrap;
+}
+
+body.dark-mode .post-tag,
+body:not(.light-mode) .post-tag {
+  background-color: color-mix(in srgb, var(--color-accent) 15%, var(--color-bg));
+}
+
+.post-hero-title {
+  font-size: var(--text-4xl);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  margin: 0 0 var(--space-xl);
+}
+
+.post-hero-meta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-md);
+  color: var(--color-text-muted);
+  font-size: var(--text-sm);
+  position: relative;
+}
+
+.post-hero-meta::before,
+.post-hero-meta::after {
+  content: '';
+  flex: 1;
+  height: 8px;
+  background-repeat: no-repeat, no-repeat, no-repeat;
+  background-size: calc(100% - 16px) 1px, 8px 8px, 8px 8px;
+  background-image:
+    linear-gradient(to right, var(--color-border), var(--color-border)),
+    radial-gradient(circle, var(--color-accent) 4px, transparent 4px),
+    radial-gradient(circle, var(--color-accent) 4px, transparent 4px);
+  background-position: center center, left center, right center;
+}
+
+.post-hero-date {
+  font-weight: 500;
+}
+
+.post-hero-readtime {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4em;
+  padding: 0.3em 0.7em;
+  border-radius: 6px;
+  background-color: var(--color-code-bg);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+}
+
+.post-hero-readtime svg {
+  width: 12px;
+  height: 12px;
+}
+
+@media (max-width: 640px) {
+  .post-hero-title {
+    font-size: var(--text-3xl);
+  }
+
+  .post-hero-tags::before,
+  .post-hero-tags::after,
+  .post-hero-meta::before,
+  .post-hero-meta::after {
+    display: none;
+  }
+
+  .post-hero-tags,
+  .post-hero-meta {
+    flex-wrap: wrap;
+  }
+}
+
+/* ============================================
    Footer
    ============================================ */
 footer {

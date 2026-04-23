@@ -58,7 +58,7 @@ BLOG_TEMPLATE = """<!DOCTYPE html>
   </article>
 
   <footer>
-    <p>&copy; 2025 Zil Patel. Built with HTML, CSS, and zero frameworks.</p>
+    <p>&copy;  2026 Zil Patel.  </p>
   </footer>
 </body>
 </html>
@@ -121,7 +121,7 @@ def convert_markdown_to_html(md_file):
     description = re.sub(r'<[^>]+>', '', description)[:160]
     
     # Generate output filename
-    output_file = OUTPUT_DIR / f"{md_file.stem.replace('2025-12-13-', '')}.html"
+    output_file = OUTPUT_DIR / f"{md_file.stem.replace(' 2026-12-13-', '')}.html"
     
     # Fill template
     html_output = BLOG_TEMPLATE.format(

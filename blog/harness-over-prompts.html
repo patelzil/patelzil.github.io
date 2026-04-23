@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <script src="/nav.js" defer></script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="A prompt describes intent. A runbook makes execution repeatable. Notes from moving a multi-repo agent workflow out of the prompt and into the harness."
+    />
+    <meta name="author" content="Zil Patel" />
+    <title>The Harness Is Doing More Work Than You Think - Zil Patel</title>
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+  <body>
+    <a href="/blog" class="back-link">← Go back to blog</a>
+    <article>
+      <header class="post-hero">
+        <div class="post-hero-tags">
+          <span class="post-tag">Agents</span>
+          <span class="post-tag">Harness Engineering</span>
+          <span class="post-tag">Developer Workflow</span>
+        </div>
+        <h1 class="post-hero-title">The Harness Is Doing More Work Than You Think</h1>
+        <div class="post-hero-meta">
+          <span class="post-hero-date">April 21, 2026</span>
+          <span class="post-hero-readtime post-tag">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"/>
+              <polyline points="12 6 12 12 16 14"/>
+            </svg>
+            3 min
+          </span>
+        </div>
+      </header>
+
+      <main>
+        <p>
+          Our dev environment spans multiple repositories, each with its own
+          startup sequence: branch sync, UI rebuild, service start, sometimes a
+          non-standard path like a nested adapter. A full refresh was more than
+          thirty minutes of manual steps, so the obvious move was to hand it to
+          an agent: pull and start all the apps, and move on.
+        </p>
+
+        <p>
+          That didn't work reliably. The failures were not about reasoning; the
+          agent could clearly follow instructions. The problem was that for every
+          invocation, it was silently re-answering questions I had never written
+          down.
+        </p>
+
+        <h2>Why better prompts didn't help</h2>
+        <p>
+          My first instinct was that the prompt needed to be more specific, so I
+          wrote a longer one. Then a longer one. It kept failing in new ways.
+          Eventually I sat down and listed the things the agent was having to
+          infer on every run: which repos count as "all apps", which branch to
+          use in each repo, what to do when a branch exists in some repos but
+          not others, which startup script each app uses, whether UI rebuilds
+          are already baked into those scripts, and how to handle the nested
+          adapter in one repo.
+        </p>
+
+        <p>
+          Each of those is a judgement call that does not appear in the code and
+          does not appear in the prompt. A longer prompt made the intent clearer
+          without making any of those answers more stable. Inconsistency and
+          retries were the predictable result.
+        </p>
+
+        <h2>What the runbook encodes</h2>
+        <p>
+          So I stopped tuning the prompt and started building around it. I wrote
+          a small, reusable multi-app runbook that prompts once for a target
+          branch, defaults to running every app, checks each repo independently
+          for that branch, and falls back to <code>develop</code>
+          where the branch does not exist. None of this is clever; it is mostly just writing down what I
+          would have done manually.
+        </p>
+
+        <p>
+          The agent now runs inside a defined execution path instead of
+          reconstructing one from context on every invocation. Setup went from a
+          long manual process to a single guided workflow, and the failure modes
+          became specific and fixable instead of vaguely vibes-y.
+        </p>
+
+        <h2>Smart shell vs. playbook</h2>
+        <p>
+          The distinction that turned out to matter, more than I expected, is
+          agent-as-smart-shell versus agent-running-a-playbook. When the agent
+          is a smart shell, you are relying on the model to rediscover your repo
+          layout, your conventions, and your exception handling on every call.
+          When the agent is running a playbook, the domain knowledge lives in
+          the system around the model, and the model is free to do the part it
+          is actually good at: the judgement inside each well-defined step.
+        </p>
+
+        <p>
+          The LangChain team recently reported that the same model, wrapped in a
+          tighter harness, jumped from roughly Top 30 to Top 5 on Terminal Bench
+          2.0, 52.8% to 66.5%. Their
+          <a
+            href="https://www.langchain.com/blog/improving-deep-agents-with-harness-engineering"
+            target="_blank"
+            >writeup</a
+          >
+          is worth reading in full. It lines up with what I keep seeing in my
+          own work: the harness is doing more work than people assume, and the
+          returns on tightening it up are larger than the returns on a better
+          prompt or a fancier model.
+        </p>
+
+        <p>
+          A prompt describes intent. A runbook makes execution repeatable. If
+          your agent keeps underperforming, the more useful question probably
+          isn't which model to switch to. It's what the agent is still having to
+          infer that you should have just written down.
+        </p>
+      </main>
+    </article>
+
+    <footer>
+      <p>&copy; 2026 Zil Patel.</p>
+    </footer>
+  </body>
+</html>
